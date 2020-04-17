@@ -1,10 +1,11 @@
 /*
 Bilal Ahmad
-Date: March 23, 2020
+Date: April 17, 2020
 Purpose: Controller for the GUI
  */
 package sample;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,28 +15,44 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class Controller {
 
     //connection string for the database
     String connectionURL = "jdbc:mysql://localhost:3306/travelexperts";
     Connection connection;
+
     @FXML
     private ResourceBundle resources;
+
     @FXML
     private URL location;
+
     @FXML
     private ListView<Agent> lvAgents;
 
+
+    @FXML
+    private Button txtAddAgent;
+
     ObservableList<Agent> agentsList = FXCollections.observableArrayList();
+
+
+
 
     //initializes the GUI
     @FXML
     void initialize() throws SQLException {
-        connection = connectToDB();
+        connection = DBConnection.connectToDB();
         if (connection != null) {
             System.out.println("Connection Established");
 
@@ -48,28 +65,6 @@ public class Controller {
         }else{
             System.out.println("Connection not established");
         }
-    }
-
-    //connection to db
-    private Connection connectToDB() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Error: unable to load driver class!");
-            System.exit(1);
-        }
-
-        //user credentials
-        String USER = "root";
-        String PASS = "";
-
-        //driver to connect to the MYSQL database
-        try {
-            return DriverManager.getConnection(connectionURL, USER, PASS);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     //returns a list of agents
@@ -104,7 +99,48 @@ public class Controller {
         return agentsList;
     }
 
-    public void listItemClicked(MouseEvent mouseEvent) {
+
+
+    public void listItemClicked(MouseEvent event) throws IOException {
         System.out.println("clicked on " + lvAgents.getSelectionModel().getSelectedItem());
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("AgentsPopUp.fxml"));
+        Parent ListViewParent = loader.load();
+
+        Scene ListViewScene = new Scene(ListViewParent);
+
+        AgentsPopUpController controller = loader.getController();
+        controller.setAgent(lvAgents.getSelectionModel().getSelectedItem());
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(ListViewScene);
+        window.show();
+
+
+
+    }
+
+    public void btnAddAgentClicked(ActionEvent event) throws IOException {
+        System.out.println("clicked on Add Agent Button");
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("AgentsDetail.fxml"));
+        Parent ListViewParent = loader.load();
+
+        Scene ListViewScene = new Scene(ListViewParent);
+
+        AgentsDetailController controller = loader.getController();
+        controller.insertMode();
+        controller.mode = "insert";
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(ListViewScene);
+        window.show();
+        /*Parent stage = FXMLLoader.load(getClass().getResource("AgentsDetail.fxml"));
+
+        Scene scene = new Scene(stage);
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(scene);*/
     }
 }
