@@ -3,6 +3,7 @@ Member of the Team 7, the luckiest of the teams
  */
 package sample;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,10 +15,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class CustomerDetailsController {
 
@@ -42,13 +48,21 @@ public class CustomerDetailsController {
     int AgtID; //id the Agent ID will be passed into
 
     @FXML
-    void btnAddAgentClicked(ActionEvent event) {
+    void btnAddCustomer(ActionEvent event) {
 
     }
 
     @FXML
-    void listItemClicked(MouseEvent event) {
+    void btnBack(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("sample.fxml"));
+        Parent ListViewParent = loader.load();
 
+        Scene ListViewScene = new Scene(ListViewParent);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(ListViewScene);
+        window.show();
     }
 
     @FXML
@@ -76,7 +90,7 @@ public class CustomerDetailsController {
     private ObservableList<Customer> GetCustomer() throws SQLException {
     //Need to pull in a variable later from agents so it only views there customers
 
-        String selectQuery = "SELECT * from customer where AgentId="+ AgtID;
+        String selectQuery = "SELECT * from customer where AgentId=1";
         PreparedStatement selectCustomers = null;
         Customer customer;
         try {

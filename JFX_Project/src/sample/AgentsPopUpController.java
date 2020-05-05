@@ -95,8 +95,15 @@ public class AgentsPopUpController {
     }
 
     @FXML
-    void btnViewCustomersClicked(ActionEvent event) {
+    void btnViewCustomersClicked(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("CustomerDetails.fxml"));
+        Parent ListViewParent = loader.load();
 
+        Scene ListViewScene = new Scene(ListViewParent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(ListViewScene);
+        window.show();
     }
 
     @FXML
