@@ -1,0 +1,101 @@
+
+/*css stylesheet for Travel Experts Travel Agency 
+Author: Anthony Okwananke
+ Date: December 2019
+ CPRG 210 Node.js Assignment*/
+
+ body {
+ 	background: url(https://images.unsplash.com/photo-1559164314-d0b3de46e8d1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1782&q=80) 
+ 
+ 	}
+
+html {
+	height: 100%;
+}
+
+#btnScrollToTop {
+	position: fixed;
+	right: 10px;
+	bottom: 10px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background: #e62739;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+	color: #ffffff;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+
+#btnScrollToTop: active {
+	background: #cc2333;
+}
+
+nav, nav ul, nav ul li a {
+	height: 50px;
+	line-height: 50px;	
+}
+
+nav {
+	width: 73%;
+	margin: 0 auto;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	min-width: 600px;
+	/*background: linear-gradient(#777, #333);*/
+	/*border: 2px solid #000;
+	border-top: none;*/
+
+}
+
+nav ul li a {
+	display: block;
+	padding-left: 30px;
+	padding-right: 30px;
+	color: #ffffff;
+	/*box-shadow: 0 0 15px #000;*/
+}
+
+ .content {
+ 	text-align: center;
+ 	padding-top: 25%;
+ 	text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+ 	             0px 8px 13px rgba(0,0,0,0.1),
+ 	             0px 18px 23px rgba(0,0,0,0.1);
+ }
+
+.jumbotron {
+	background: rgba(0.2,0.2,0.2,0.2);
+
+}
+
+form, label, p {
+	color: white!important;
+}
+ 
+ h1, h3, h4, h5 {
+ 	color: white;
+ 	padding-top: 0px;
+ 	text-align: center;
+
+ }
+
+ p {
+ 	color: white;
+ }
+
+ h1 {
+ 	font-weight: 700;
+ 	font-size: 5em;
+ }
+
+ hr {
+ 	width: 400px;
+ 	border-top: 1px solid #f8f8f8;
+ 	border-bottom: 1px solid rgba(0,0,0,0.2);
+ }
