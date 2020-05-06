@@ -1,6 +1,3 @@
-/*Brandon Cuthbertson
-Member of the Team 7, the luckiest of the teams
- */
 package sample;
 
 import java.io.IOException;
@@ -26,7 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class CustomerDetailsController {
+public class NullCustomersController {
 
     @FXML
     private ResourceBundle resources;
@@ -37,30 +34,16 @@ public class CustomerDetailsController {
     @FXML
     private ListView<Customer> lvCustomer;
 
-
-    @FXML
-    private Text lbName;
-
-
     @FXML
     private Button btnBack;
 
-
+    @FXML
+    private Text lbName;
     ObservableList<Customer> customerList = FXCollections.observableArrayList();
     Connection connection;
-    private Agent selectedAgent;
-    private int agentid;
-
-    public void setDataIntoFields(Agent agent) {
-    selectedAgent = agent;
-    agentid = selectedAgent.getAgentId();
-    lbName.setText(selectedAgent.toString() + " Customer's");
-    }
-
-
 
     @FXML
-    void btnBack(ActionEvent event) throws IOException {
+    void btnBackClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("sample.fxml"));
         Parent ListViewParent = loader.load();
@@ -73,12 +56,15 @@ public class CustomerDetailsController {
     }
 
     @FXML
+    void lvCustomersClick(MouseEvent event) {
+
+    }
+
+    @FXML
     void initialize() {
-        assert lvCustomer != null : "fx:id=\"lvCustomer\" was not injected: check your FXML file 'CustomerDetails.fxml'.";
-        assert lbName != null : "fx:id=\"lblName\" was not injected: check your FXML file 'CustomerDetails.fxml'.";
-
-        assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'CustomerDetails.fxml'.";
-
+        assert lvCustomer != null : "fx:id=\"lvCustomer\" was not injected: check your FXML file 'NullCustomers.fxml'.";
+        assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'NullCustomers.fxml'.";
+        assert lbName != null : "fx:id=\"lbName\" was not injected: check your FXML file 'NullCustomers.fxml'.";
         connection = DBConnection.connectToDB();
 
         try {
@@ -96,9 +82,7 @@ public class CustomerDetailsController {
     }
 
     private ObservableList<Customer> GetCustomer() throws SQLException {
-    //Need to pull in a variable later from agents so it only views there customers
-
-        String selectQuery = "SELECT * from customer where AgentId = " + agentid;
+        String selectQuery = "SELECT * from customer where AgentId = NULL";
         PreparedStatement selectCustomers = null;
         Customer customer;
         try {
@@ -132,12 +116,6 @@ public class CustomerDetailsController {
         return customerList;
     }
 
-
+    public void setDataIntoFields(Agent selectedAgent) {
+    }
 }
-
-
-
-
-
-
-/*No Leprechauns down here */
