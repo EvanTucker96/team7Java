@@ -22,7 +22,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -49,12 +48,26 @@ public class CustomerDetailsController {
     ObservableList<Customer> customerList = FXCollections.observableArrayList();
     Connection connection;
     private Agent selectedAgent;
-    private int agentid;
+    private int agentId;
 
     public void setDataIntoFields(Agent agent) {
     selectedAgent = agent;
-    agentid = selectedAgent.getAgentId();
+    agentId = selectedAgent.getAgentId();
     lbName.setText(selectedAgent.toString() + " Customer's");
+    ///RUN CONNECTION
+    connection = DBConnection.connectToDB();
+
+        try {
+            System.out.println("Connected");
+            //shows customers
+            customerList = GetCustomer(selectedAgent.getAgentId());
+            System.out.println("CustomerList: "+ customerList);
+            lvCustomer.getItems().addAll(customerList);
+            lvCustomer.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error Not Connected");
+        }
     }
 
 
@@ -76,29 +89,13 @@ public class CustomerDetailsController {
     void initialize() {
         assert lvCustomer != null : "fx:id=\"lvCustomer\" was not injected: check your FXML file 'CustomerDetails.fxml'.";
         assert lbName != null : "fx:id=\"lblName\" was not injected: check your FXML file 'CustomerDetails.fxml'.";
-
         assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'CustomerDetails.fxml'.";
-
-        connection = DBConnection.connectToDB();
-
-        try {
-            System.out.println("Connected");
-            //shows customers
-            customerList = GetCustomer();
-            System.out.println("agentsList: "+ customerList);
-            lvCustomer.getItems().addAll(customerList);
-            lvCustomer.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error Not Connected");
-        }
-
     }
 
-    private ObservableList<Customer> GetCustomer() throws SQLException {
+    private ObservableList<Customer> GetCustomer(int agentId) throws SQLException {
     //Need to pull in a variable later from agents so it only views there customers
 
-        String selectQuery = "SELECT * from customer where AgentId = " + agentid;
+        String selectQuery = "SELECT * from customers where AgentId = " + agentId;
         PreparedStatement selectCustomers = null;
         Customer customer;
         try {
@@ -117,7 +114,7 @@ public class CustomerDetailsController {
                         rset.getString("CustHomePhone"),
                         rset.getString("CustBusPhone"),
                         rset.getString("CustEmail"),
-                        rset.getInt("AgencyId")
+                        rset.getInt("AgentId")
                 );
                 System.out.println(customer);
                 customerList.add(customer);

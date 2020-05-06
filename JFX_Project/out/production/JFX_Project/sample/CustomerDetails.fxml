@@ -9,6 +9,6 @@
    <children>
       <ListView fx:id="lvCustomer" layoutX="15.0" layoutY="39.0" prefHeight="272.0" prefWidth="215.0" />
       <Button fx:id="btnBack" layoutX="82.0" layoutY="316.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="33.0" prefWidth="82.0" text="Back to List" />
-      <Text fx:id="lbName" layoutX="14.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers" wrappingWidth="128.53674697875977" />
+      <Text fx:id="lbName" layoutX="15.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers" wrappingWidth="215.20000000000005" />
    </children>
 </AnchorPane>
