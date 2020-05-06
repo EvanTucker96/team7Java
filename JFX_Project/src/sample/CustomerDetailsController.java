@@ -142,7 +142,7 @@ public class CustomerDetailsController {
         System.out.println("clicked on " + lvCustomer.getSelectionModel().getSelectedItem());
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("InformationController.fxml"));
+        loader.setLocation(getClass().getResource("Information.fxml"));
         Parent ListViewParent = loader.load();
 
         Scene ListViewScene = new Scene(ListViewParent);
