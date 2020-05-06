@@ -109,6 +109,7 @@ public class AgentsPopUpController {
 
         CustomerDetailsController controller = loader.getController();
         controller.setDataIntoFields(selectedAgent);
+        controller.setAgents(selectedAgent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(ListViewScene);
         window.show();
@@ -123,7 +124,7 @@ public class AgentsPopUpController {
         Scene ListViewScene = new Scene(ListViewParent);
 
         NullCustomersController controller = loader.getController();
-        controller.setDataIntoFields(selectedAgent);
+        controller.setAgent(selectedAgent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(ListViewScene);
         window.show();

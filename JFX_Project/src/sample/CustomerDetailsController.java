@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.text.Text;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class CustomerDetailsController {
@@ -48,11 +49,12 @@ public class CustomerDetailsController {
     ObservableList<Customer> customerList = FXCollections.observableArrayList();
     Connection connection;
     private Agent selectedAgent;
-    private int agentId;
+    private Agent choosenAgent;
+
 
     public void setDataIntoFields(Agent agent) {
     selectedAgent = agent;
-    agentId = selectedAgent.getAgentId();
+
     lbName.setText(selectedAgent.toString() + " Customer's");
     ///RUN CONNECTION
     connection = DBConnection.connectToDB();
@@ -68,6 +70,11 @@ public class CustomerDetailsController {
             e.printStackTrace();
             System.out.println("Error Not Connected");
         }
+    }
+    @FXML
+    Agent setAgents (Agent agent){
+        selectedAgent = agent;
+        return selectedAgent;
     }
 
 
@@ -128,6 +135,28 @@ public class CustomerDetailsController {
 
         return customerList;
     }
+
+    @FXML
+    void lvCustomersClicked(MouseEvent event) throws IOException {
+        //on menu click
+        System.out.println("clicked on " + lvCustomer.getSelectionModel().getSelectedItem());
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("InformationController.fxml"));
+        Parent ListViewParent = loader.load();
+
+        Scene ListViewScene = new Scene(ListViewParent);
+
+        InformationController controller = loader.getController();
+        controller.setCustomer(lvCustomer.getSelectionModel().getSelectedItem());
+        controller.AgentID(choosenAgent);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(ListViewScene);
+        window.show();
+
+    }
+
 
 
 }

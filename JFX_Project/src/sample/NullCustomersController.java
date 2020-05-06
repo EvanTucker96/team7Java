@@ -40,8 +40,14 @@ public class NullCustomersController {
     @FXML
     private Text lbName;
     ObservableList<Customer> customerList = FXCollections.observableArrayList();
-    Connection connection;
+    Connection connection = DBConnection.connectToDB();
+    private Agent selectedAgent;
 
+    @FXML
+    Agent setAgent (Agent agent){
+        selectedAgent = agent;
+        return selectedAgent;
+    }
     @FXML
     void btnBackClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -56,7 +62,7 @@ public class NullCustomersController {
     }
 
     @FXML
-    void lvCustomersClick(MouseEvent event) {
+    void lvCustomersClick(MouseEvent event) throws IOException {
 
     }
 
@@ -71,7 +77,7 @@ public class NullCustomersController {
             System.out.println("Connected");
             //shows customers
             customerList = GetCustomer();
-            System.out.println("agentsList: "+ customerList);
+            System.out.println("Customer List: "+ customerList);
             lvCustomer.getItems().addAll(customerList);
             lvCustomer.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         } catch (Exception e) {
@@ -82,7 +88,7 @@ public class NullCustomersController {
     }
 
     private ObservableList<Customer> GetCustomer() throws SQLException {
-        String selectQuery = "SELECT * from customer where AgentId = NULL";
+        String selectQuery = "SELECT * from customers where AgentId is NULL";
         PreparedStatement selectCustomers = null;
         Customer customer;
         try {
@@ -101,7 +107,7 @@ public class NullCustomersController {
                         rset.getString("CustHomePhone"),
                         rset.getString("CustBusPhone"),
                         rset.getString("CustEmail"),
-                        rset.getInt("AgencyId")
+                        rset.getInt("AgentId")
                 );
                 System.out.println(customer);
                 customerList.add(customer);
