@@ -45,10 +45,6 @@ public class AgentsPopUpController {
     @FXML
     private Button btnBackToList;
 
-    @FXML
-    private Button btnAddCustomers;
-
-
 
 
     @FXML
@@ -100,24 +96,14 @@ public class AgentsPopUpController {
 
     @FXML
     void btnViewCustomersClicked(ActionEvent event) throws IOException {
-        //added by Brandon Cuthbertson
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("CustomerDetails.fxml"));
         Parent ListViewParent = loader.load();
 
         Scene ListViewScene = new Scene(ListViewParent);
-
-
-        CustomerDetailsController controller = loader.getController();
-        controller.setDataIntoFields(selectedAgent);
-
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(ListViewScene);
         window.show();
-    }
-    @FXML
-    void btnAddCustomers(ActionEvent event) {
-    //added by Brandon Cuthbertson
     }
 
     @FXML

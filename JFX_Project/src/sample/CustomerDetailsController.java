@@ -23,7 +23,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class CustomerDetailsController {
@@ -36,10 +35,9 @@ public class CustomerDetailsController {
 
     @FXML
     private ListView<Customer> lvCustomer;
+
     @FXML
-    private Text lblName;
-
-
+    private Button btnAddCustomer;
 
     @FXML
     private Button btnBack;
@@ -47,17 +45,12 @@ public class CustomerDetailsController {
 
     ObservableList<Customer> customerList = FXCollections.observableArrayList();
     Connection connection;
-    private Agent selectedAgent;
-    private Integer agentId;
+    int AgtID; //id the Agent ID will be passed into
 
+    @FXML
+    void btnAddCustomer(ActionEvent event) {
 
-    public void setDataIntoFields(Agent agent) {
-            selectedAgent = agent;
-            agentId = selectedAgent.getAgentId();
-            lblName.setText(selectedAgent.toString() + "'s Customers");
-
-        }
-
+    }
 
     @FXML
     void btnBack(ActionEvent event) throws IOException {
@@ -72,11 +65,10 @@ public class CustomerDetailsController {
         window.show();
     }
 
-
     @FXML
     void initialize() {
         assert lvCustomer != null : "fx:id=\"lvCustomer\" was not injected: check your FXML file 'CustomerDetails.fxml'.";
-        assert lblName != null : "fx:id=\"lblName\" was not injected: check your FXML file 'CustomerDetails.fxml'.";
+        assert btnAddCustomer != null : "fx:id=\"btnAddCustomer\" was not injected: check your FXML file 'CustomerDetails.fxml'.";
         assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'CustomerDetails.fxml'.";
 
         connection = DBConnection.connectToDB();
@@ -93,38 +85,31 @@ public class CustomerDetailsController {
             System.out.println("Error Not Connected");
         }
 
-
     }
 
     private ObservableList<Customer> GetCustomer() throws SQLException {
-            String selectQuery;
-        if (agentId != null)
-        {
-             selectQuery = "SELECT * from customers where AgentId = " + agentId;
+    //Need to pull in a variable later from agents so it only views there customers
 
-        }
-        else {
-             selectQuery = "Select * from customers";
-        }
-            PreparedStatement selectCustomers = null;
-            Customer customer;
+        String selectQuery = "SELECT * from customer where AgentId=1";
+        PreparedStatement selectCustomers = null;
+        Customer customer;
         try {
             selectCustomers = connection.prepareStatement(selectQuery);
-            ResultSet rs = selectCustomers.executeQuery(selectQuery);
-            while (rs.next()) {
+            ResultSet rset = selectCustomers.executeQuery(selectQuery);
+            while (rset.next()) {
                 customer = new Customer(
-                        rs.getInt("CustomerId"),
-                        rs.getString("CustFirstName"),
-                        rs.getString("CustLastName"),
-                        rs.getString("CustAddress"),
-                        rs.getString("CustCity"),
-                        rs.getString("CustProv"),
-                        rs.getString("CustPostal"),
-                        rs.getString("CustCountry"),
-                        rs.getString("CustHomePhone"),
-                        rs.getString("CustBusPhone"),
-                        rs.getString("CustEmail"),
-                        rs.getInt("AgentId")
+                        rset.getInt("CustomerId"),
+                        rset.getString("CustFirstName"),
+                        rset.getString("CustLastName"),
+                        rset.getString("CustAddress"),
+                        rset.getString("CustCity"),
+                        rset.getString("CustProv"),
+                        rset.getString("CustPostal"),
+                        rset.getString("CustCountry"),
+                        rset.getString("CustHomePhone"),
+                        rset.getString("CustBusPhone"),
+                        rset.getString("CustEmail"),
+                        rset.getInt("AgencyId")
                 );
                 System.out.println(customer);
                 customerList.add(customer);
@@ -138,8 +123,6 @@ public class CustomerDetailsController {
 
         return customerList;
     }
-
-
 }
 
 

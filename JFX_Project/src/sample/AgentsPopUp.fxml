@@ -1,36 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="364.0" prefWidth="246.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AgentsPopUpController">
+<AnchorPane prefHeight="364.0" prefWidth="246.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AgentsPopUpController">
    <children>
-      <Button fx:id="btnBackToList" layoutX="81.0" layoutY="314.0" mnemonicParsing="false" onAction="#btnBackToListClicked" prefHeight="34.0" prefWidth="84.0" text="Back to List" />
-      <VBox alignment="CENTER" layoutY="24.0" prefHeight="290.0" prefWidth="246.0">
-         <children>
-            <Button fx:id="btnUpdateAgent" mnemonicParsing="false" onAction="#btnUpdateAgentClicked" prefHeight="58.0" prefWidth="118.0" text="Update" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btnDeleteAgent" mnemonicParsing="false" onAction="#btnDeleteAgentClicked" prefHeight="58.0" prefWidth="118.0" text="Delete" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btnViewCustomers" mnemonicParsing="false" onAction="#btnViewCustomersClicked" prefHeight="58.0" prefWidth="117.0" text="View Customers" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btnAddCustomers" mnemonicParsing="false" onAction="#btnAddCustomers" prefHeight="58.0" prefWidth="117.0" text="Add Customers" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-      </VBox>
+      <Button fx:id="btnUpdateAgent" layoutX="67.0" layoutY="68.0" mnemonicParsing="false" onAction="#btnUpdateAgentClicked" prefHeight="58.0" prefWidth="118.0" text="Update" />
+      <Button fx:id="btnDeleteAgent" layoutX="67.0" layoutY="137.0" mnemonicParsing="false" onAction="#btnDeleteAgentClicked" prefHeight="58.0" prefWidth="118.0" text="Delete" />
+      <Button fx:id="btnViewCustomers" layoutX="67.0" layoutY="208.0" mnemonicParsing="false" onAction="#btnViewCustomersClicked" prefHeight="58.0" prefWidth="117.0" text="View Customers" />
+      <Button fx:id="btnBackToList" layoutX="22.0" layoutY="281.0" mnemonicParsing="false" onAction="#btnBackToListClicked" prefHeight="34.0" prefWidth="84.0" text="Back to List" />
    </children>
 </AnchorPane>
