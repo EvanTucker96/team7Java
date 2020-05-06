@@ -1,0 +1,12 @@
+body {
+    padding-top: 90px;
+    padding-bottom: 20px;
+   /*  background-image: url('/Images/BackgroundImage-extra.jpg');
+    background-color: black;
+    background-size: cover;
+    background-position:center center;
+    background-repeat: no-repeat; */
+    margin:auto;
+    font-size: 1rem;
+}
+#success_message{ display: none;} 
