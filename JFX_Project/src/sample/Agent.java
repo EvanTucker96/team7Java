@@ -1,8 +1,3 @@
-/*
-Bilal Ahmad
-Date: April 17, 2020
-Purpose: Agent class to hold all its properties for its objects
- */
 package sample;
 
 public class Agent {

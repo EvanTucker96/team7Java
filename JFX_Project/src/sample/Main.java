@@ -18,7 +18,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("TravelExperts Agents");
-        primaryStage.setScene(new Scene(root, 233, 365));
+        primaryStage.setScene(new Scene(root, 233, 364));
         primaryStage.show();
     }
 
