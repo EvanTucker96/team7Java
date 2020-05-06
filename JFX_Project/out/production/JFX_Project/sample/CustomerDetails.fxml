@@ -9,7 +9,6 @@
    <children>
       <ListView fx:id="lvCustomer" layoutX="14.0" layoutY="39.0" prefHeight="272.0" prefWidth="200.0" />
       <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers" wrappingWidth="128.53674697875977" />
-      <Button fx:id="btnAddCustomer" layoutX="14.0" layoutY="311.0" mnemonicParsing="false" onAction="#btnAddCustomer" prefHeight="33.0" prefWidth="82.0" text="Add Customer" />
       <Button fx:id="btnBack" layoutX="131.0" layoutY="311.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="33.0" prefWidth="82.0" text="Back" />
    </children>
 </AnchorPane>
