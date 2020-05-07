@@ -1,4 +1,5 @@
 # team7Java
+(THE LUCKY TEAM ^u^)
 
 Work Contributions:
 
@@ -7,9 +8,30 @@ Evan:
 	-Troubleshooting JSP Rest service
 	
 Brandon:
-	-
+	-JavaFX (Partial)
+		-All  Textbox Validation
+		-FXML & CONTROLLERSFILES
+			-CustomerDetails / CustomerDetailsController
+			-Information / InformationController
+			-NullCustomers / NullCustomersController
+		- JAVA
+			-Customers
+			-Validator
+			
 	
 Bial:
+	-JavaFX (Partial)
+
+		-FXML & CONTROLLERSFILES
+			-AgentDetails / AgentDetailsController
+			-AgentPopUp / AgentPopUpController
+			-NullCustomers / NullCustomersController
+			-sample
+		- JAVA
+			-Agents
+			-Controller
+			-DBConnection
+			-Main
 	-
 	
 Anthony:
