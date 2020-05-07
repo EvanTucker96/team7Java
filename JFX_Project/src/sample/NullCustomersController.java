@@ -22,7 +22,9 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+/*
+BY BRANDON CUTHBERTSON
+ */
 public class NullCustomersController {
 
     @FXML

@@ -6,7 +6,7 @@ import javafx.scene.text.Text;
 
 import java.util.regex.Pattern;
 /*
-VALIDATOR MADE BY BRANDON
+VALIDATOR MADE AND DONE BY BRANDON
 
  */
 
@@ -91,3 +91,6 @@ public class Validator {
 
 
 }
+/*
+WHY ARE YOU DOWN HERE AND WHY AM I YELLING
+ */
