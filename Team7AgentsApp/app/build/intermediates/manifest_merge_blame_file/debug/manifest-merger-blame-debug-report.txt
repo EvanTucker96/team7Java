@@ -1,0 +1,60 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.oosd.team7agentsapp"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="14"
+8-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:4:5-67
+11-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:4:22-64
+12
+13    <application
+13-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:5:5-24:19
+14        android:allowBackup="true"
+14-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:7:9-35
+15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+15-->[androidx.core:core:1.1.0] C:\Users\Tucker\.gradle\caches\transforms-2\files-2.1\1cd7eff88f5e86d0249af2958bf465f0\core-1.1.0\AndroidManifest.xml:24:18-86
+16        android:debuggable="true"
+17        android:icon="@mipmap/ic_launcher"
+17-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:8:9-43
+18        android:label="Travel Experts Agents"
+18-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:9:9-46
+19        android:roundIcon="@mipmap/ic_launcher_round"
+19-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:10:9-54
+20        android:supportsRtl="true"
+20-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:11:9-35
+21        android:testOnly="true"
+22        android:theme="@style/AppTheme"
+22-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:12:9-40
+23        android:usesCleartextTraffic="true" >
+23-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:6:9-44
+24        <activity android:name="com.oosd.team7agentsapp.MainActivity" >
+24-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:13:9-19:20
+24-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:13:19-47
+25            <intent-filter>
+25-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:14:13-18:25
+26                <action android:name="android.intent.action.MAIN" />
+26-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:15:17-69
+26-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:15:25-66
+27
+28                <category android:name="android.intent.category.LAUNCHER" />
+28-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:17:17-77
+28-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:17:27-74
+29            </intent-filter>
+30        </activity>
+31        <activity
+31-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:20:9-23:20
+32            android:name="com.oosd.team7agentsapp.AgentDetails"
+32-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:21:13-41
+33            android:label="Agent Details" >
+33-->D:\Team7AgentsApp\app\src\main\AndroidManifest.xml:22:13-42
+34        </activity>
+35    </application>
+36
+37</manifest>
