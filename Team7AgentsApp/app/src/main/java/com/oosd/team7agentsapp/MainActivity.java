@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         lvAgents = findViewById(R.id.lvAgents);
+        //On click listener for the sections of the listview, when clicked with open the
+        //agent details activity, and bring over the specific agent object.
         lvAgents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnRefresh = findViewById(R.id.btnRefresh);
+        //refresh button that calls the json parse, so when the database is updated,
+        //clicking the button will load the new agent from the database.
         btnRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    //next two methods just run the same loading method that will refresh the agents from the db.
+    //these were added to try and refresh the page whenever it loads.
     @Override
     protected void onStart() {
         super.onStart();
@@ -66,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
         jsonParse();
     }
 
+    //method that grabs the agent data from the database, and adds it to an agent object. This uses
+    //the rest service created by Bilal.
     public void jsonParse(){
         String GETALLAGENTS = "http://192.168.1.5:8080/TestService2-1/rs/agent/getallagents";
             RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -104,10 +112,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         requestQueue.add(request);
-    }
-    private void GoToDetails(long id){
-        Intent appInfo = new Intent(getApplicationContext(), AgentDetails.class);
-        appInfo.putExtra("agent_details", id);
-        startActivity(appInfo);
     }
 }

@@ -4,6 +4,14 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
+/*
+Generated class from the database.
+Evan Tucker
+OOSD Fall track
+May 2020
+ */
+
+
 public class Agents implements Serializable {
 
     private Integer AgentId;

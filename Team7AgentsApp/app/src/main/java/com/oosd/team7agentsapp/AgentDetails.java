@@ -42,6 +42,7 @@ import java.util.Map;
  */
 public class AgentDetails extends AppCompatActivity {
 
+    //On create that loads when the activity is opened. Sets up the text fields and buttons.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +55,12 @@ public class AgentDetails extends AppCompatActivity {
         Button btnUpdate = findViewById(R.id.btnUpdate);
         Button btnDelete = findViewById(R.id.btnDelete);
 
-        //final long agentId = (long) getIntent().getSerializableExtra("agent_details");
+        //getting the intent from the main activity, with the full Agent Object.
         Intent intent = getIntent();
         final Agents a = (Agents) intent.getSerializableExtra("agent");
         final String id = a.getAgentId().toString();
 
+        //sets the text fields with the appropriate data from the agent class object brought over by the intent.
         etFN.setText(a.getAgtFirstName());
         etLN.setText(a.getAgtLastName());
         etPosition.setText(a.getAgtPosition());
@@ -66,7 +68,9 @@ public class AgentDetails extends AppCompatActivity {
         etEmail.setText(a.getAgtEmail());
 
 
-
+        //button update listener that gets called when the update button is clicked
+        //this grabs the text from the text fields, then uses the rest service made by Bilal
+        //to update the database.
         btnUpdate.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +107,10 @@ public class AgentDetails extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
+        //on click listener for the delete button, that gets called when the delete button
+        //is pressed. this will simply delete the agent from the database from the restservice.
+        //it only needs the agent ID. BUG: only works on agents with no customers - updates to
+        //constraints needed to make this work fully.
         btnDelete.setOnClickListener(new AdapterView.OnClickListener() {
             String deleteURL = "http://192.168.1.5:8080/TestService2-1/rs/agent/deleteagent/" + id;
             RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
