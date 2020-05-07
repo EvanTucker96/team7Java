@@ -17,7 +17,7 @@ public class DBConnection {
     public static Connection connectToDB() {
         try {
             //"com.mysql.jdbc.Driver.   oracle.jdbc.driver.OracleDriver"
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             System.out.println("Error: unable to load driver class!");
             System.exit(1);

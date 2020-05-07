@@ -7,10 +7,7 @@ package sample;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javax.swing.*;
 
 public class AgentsPopUpController {
 
@@ -44,8 +42,9 @@ public class AgentsPopUpController {
 
     @FXML
     private Button btnBackToList;
-
-
+	
+    @FXML
+    private  Button btnAddCustomers;
 
     @FXML
     Agent setAgent (Agent agent){
@@ -55,6 +54,36 @@ public class AgentsPopUpController {
 
     @FXML
     void btnDeleteAgentClicked(ActionEvent event) throws SQLException {
+
+        //Are you sure added by Brandon
+
+        int p = JOptionPane.showConfirmDialog(null,"Are You Sure you want to Delete this Agent?",
+                "Delete",JOptionPane.YES_NO_OPTION);
+
+
+        if (p == 0)//yes
+        {   ConvertCustomersToNull();
+            DeleteAgent();
+            setPopupButtonsDisabled(true);
+
+
+        }
+        else if (p == 1) {
+            setPopupButtonsDisabled(false);
+        }
+    }
+
+    private void setPopupButtonsDisabled(boolean toggleOnOFF) {
+        //added by brandon
+        btnDeleteAgent.setDisable(toggleOnOFF);
+        btnUpdateAgent.setDisable(toggleOnOFF);
+        btnViewCustomers.setDisable(toggleOnOFF);
+        btnAddCustomers.setDisable(toggleOnOFF);
+    }
+
+    public void DeleteAgent() throws SQLException {
+        //By Bilal
+
         PreparedStatement deleteData = null;
         ResultSet resultSet = null;
         try {
@@ -76,6 +105,25 @@ public class AgentsPopUpController {
         }
 
     }
+    private void ConvertCustomersToNull() throws SQLException {
+        //BY BRANDON CUTHBERTSON MAKES IT SO THE CUSTOMERS DONT GET LOST
+        PreparedStatement NullData = null;
+        ResultSet resultSet = null;
+        try {
+            String insertQuery = "UPDATE customers SET AgentId=NULL " +
+                    "WHERE AgentId = " + selectedAgent.getAgentId();
+            NullData = connection.prepareStatement(insertQuery);
+            //NullData.setInt(1, Types.NULL);
+            NullData.executeUpdate();
+            System.out.println(selectedAgent.getAgtFirstName() + "" + selectedAgent.getAgtLastName() + "'s: Customers Have been made null ");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            NullData.close();
+        }
+    }
+
+
 
     @FXML
     void btnUpdateAgentClicked(ActionEvent event) throws IOException {
@@ -95,7 +143,35 @@ public class AgentsPopUpController {
     }
 
     @FXML
-    void btnViewCustomersClicked(ActionEvent event) {
+    void btnViewCustomersClicked(ActionEvent event) throws IOException {
+        //added by Brandon Cuthbertson
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("CustomerDetails.fxml"));
+        Parent ListViewParent = loader.load();
+
+        Scene ListViewScene = new Scene(ListViewParent);
+
+        CustomerDetailsController controller = loader.getController();
+        controller.setDataIntoFields(selectedAgent);
+        controller.setAgents(selectedAgent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(ListViewScene);
+        window.show();
+    }
+    @FXML
+    void btnAddCustomersClicked(ActionEvent event) throws IOException {
+        //added by Brandon Cuthbertson
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("NullCustomers.fxml"));
+        Parent ListViewParent = loader.load();
+
+        Scene ListViewScene = new Scene(ListViewParent);
+
+        NullCustomersController controller = loader.getController();
+        controller.setAgent(selectedAgent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(ListViewScene);
+        window.show();
 
     }
 
@@ -117,4 +193,5 @@ public class AgentsPopUpController {
         window.setScene(ListViewScene);
         window.show();
     }
+
 }
