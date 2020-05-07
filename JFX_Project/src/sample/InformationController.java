@@ -216,7 +216,7 @@ public class InformationController {
         }
         else { txtCountry.setStyle("-fx-control-inner-background: white"); }
 
-        if((Validator.nullTextField(txtHomePhone) == true) || (Validator.isPhone(txtHomePhone) == false)){
+        if((Validator.nullTextField(txtHomePhone) == false) && (Validator.isPhone(txtHomePhone) == false)){
             txtHomePhone.setStyle("-fx-control-inner-background: RED");
             System.out.println(txtHomePhone + " is inValid");
             canUpdate = false;
@@ -224,7 +224,7 @@ public class InformationController {
         }
         else { txtHomePhone.setStyle("-fx-control-inner-background: white"); }
 
-        if((Validator.nullTextField(txtBusinessPhone) == true) || (Validator.isPhone(txtBusinessPhone) == false)){
+        if((Validator.nullTextField(txtBusinessPhone) == false) && (Validator.isPhone(txtBusinessPhone) == false)){
             txtBusinessPhone.setStyle("-fx-control-inner-background: RED");
             System.out.println(txtBusinessPhone + " is inValid");
             canUpdate = false;

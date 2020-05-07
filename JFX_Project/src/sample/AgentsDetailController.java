@@ -149,7 +149,7 @@ public class AgentsDetailController {
             }
             else { txtAgentPosition.setStyle("-fx-control-inner-background: white"); }
 
-            if ((Validator.numbersOnly(txtAgentAgencyId) == false)){
+            if ((Validator.nullTextField(txtAgentAgencyId) == true)||(Validator.numbersOnly(txtAgentAgencyId) == false)){
                 txtAgentAgencyId.setStyle("-fx-control-inner-background: RED");
                 System.out.println(txtAgentAgencyId.getText() + " is inValid");
                 canUpdate = false;
@@ -335,7 +335,7 @@ public class AgentsDetailController {
         }
         else { txtAgentPosition.setStyle("-fx-control-inner-background: white"); }
 
-        if ((Validator.numbersOnly(txtAgentAgencyId) == false)){
+        if ((Validator.nullTextField(txtAgentAgencyId) == true)||(Validator.numbersOnly(txtAgentAgencyId) == false)){
             txtAgentAgencyId.setStyle("-fx-control-inner-background: RED");
             System.out.println(txtAgentAgencyId + " is inValid");
             canUpdate = false;
