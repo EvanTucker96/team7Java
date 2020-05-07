@@ -7,10 +7,7 @@ package sample;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +18,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import javax.swing.*;
 
 public class AgentsPopUpController {
 
@@ -46,7 +45,7 @@ public class AgentsPopUpController {
     private Button btnBackToList;
 
     @FXML
-    private  Button AddCustomers;
+    private  Button btnAddCustomers;
 
 
 
@@ -59,6 +58,34 @@ public class AgentsPopUpController {
 
     @FXML
     void btnDeleteAgentClicked(ActionEvent event) throws SQLException {
+        //Are you sure added by Brandon
+
+        int p = JOptionPane.showConfirmDialog(null,"Are You Sure you want to Delete this Agent?",
+                "Delete",JOptionPane.YES_NO_OPTION);
+
+
+        if (p == 0)//yes
+        {   ConvertCustomersToNull();
+            DeleteAgent();
+            setPopupButtonsDisabled(true);
+
+
+        }
+        else if (p == 1) {
+            setPopupButtonsDisabled(false);
+        }
+    }
+
+    private void setPopupButtonsDisabled(boolean toggleOnOFF) {
+        //added by brandon
+        btnDeleteAgent.setDisable(toggleOnOFF);
+        btnUpdateAgent.setDisable(toggleOnOFF);
+        btnViewCustomers.setDisable(toggleOnOFF);
+        btnAddCustomers.setDisable(toggleOnOFF);
+    }
+
+    public void DeleteAgent() throws SQLException {
+        //By Bilal
         PreparedStatement deleteData = null;
         ResultSet resultSet = null;
         try {
@@ -78,8 +105,25 @@ public class AgentsPopUpController {
         } finally {
             deleteData.close();
         }
-
     }
+    private void ConvertCustomersToNull() throws SQLException {
+        //BY BRANDON CUTHBERTSON MAKES IT SO THE CUSTOMERS DONT GET LOST
+        PreparedStatement NullData = null;
+        ResultSet resultSet = null;
+        try {
+            String insertQuery = "UPDATE customers SET AgentId=NULL " +
+                    "WHERE AgentId = " + selectedAgent.getAgentId();
+            NullData = connection.prepareStatement(insertQuery);
+            //NullData.setInt(1, Types.NULL);
+            NullData.executeUpdate();
+            System.out.println(selectedAgent.getAgtFirstName() + "" + selectedAgent.getAgtLastName() + "'s: Customers Have been made null ");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            NullData.close();
+        }
+    }
+
 
     @FXML
     void btnUpdateAgentClicked(ActionEvent event) throws IOException {
@@ -149,4 +193,5 @@ public class AgentsPopUpController {
         window.setScene(ListViewScene);
         window.show();
     }
+
 }

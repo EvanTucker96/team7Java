@@ -73,8 +73,8 @@ public class CustomerDetailsController {
     }
     @FXML
     Agent setAgents (Agent agent){
-        selectedAgent = agent;
-        return selectedAgent;
+        choosenAgent = agent;
+        return choosenAgent;
     }
 
 
@@ -148,7 +148,7 @@ public class CustomerDetailsController {
         Scene ListViewScene = new Scene(ListViewParent);
 
         InformationController controller = loader.getController();
-        controller.setCustomer(lvCustomer.getSelectionModel().getSelectedItem());
+        controller.getCustomer(lvCustomer.getSelectionModel().getSelectedItem(), false);
         controller.AgentID(choosenAgent);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

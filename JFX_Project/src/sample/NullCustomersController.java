@@ -63,6 +63,22 @@ public class NullCustomersController {
 
     @FXML
     void lvCustomersClick(MouseEvent event) throws IOException {
+        //on menu click
+        System.out.println("clicked on " + lvCustomer.getSelectionModel().getSelectedItem());
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Information.fxml"));
+        Parent ListViewParent = loader.load();
+
+        Scene ListViewScene = new Scene(ListViewParent);
+
+        InformationController controller = loader.getController();
+        controller.getCustomer(lvCustomer.getSelectionModel().getSelectedItem(), true);
+        controller.AgentID(selectedAgent);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(ListViewScene);
+        window.show();
 
     }
 

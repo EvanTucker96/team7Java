@@ -39,5 +39,6 @@
       <TextField fx:id="txtOldID" layoutX="110.0" layoutY="310.0" prefWidth="125.0" />
       <Label layoutX="12.0" layoutY="122.0" prefHeight="27.0" prefWidth="98.0" text="Province: " />
       <TextField fx:id="txtProvince" layoutX="110.0" layoutY="123.0" prefWidth="125.0" />
+      <TextField fx:id="txtCustomerID" disable="true" layoutX="116.0" layoutY="349.0" prefWidth="16.0" visible="false" />
    </children>
 </AnchorPane>
