@@ -20,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -74,6 +75,7 @@ public class AgentsDetailController {
     @FXML
     private Button btnBackToList;
 
+
     @FXML
     void initialize() {
         if(mode =="update"){
@@ -97,40 +99,123 @@ public class AgentsDetailController {
     }
 
     public void btnAgentSaveClicked(ActionEvent actionEvent) throws SQLException {
-        disableAllFields();
-        PreparedStatement saveData = null;
-        ResultSet resultSet = null;
-        try {
-            String UpdateQuery = "UPDATE Agents set " +
-                    "AgtFirstName = ?," +
-                    "AgtMiddleInitial = ?," +
-                    "AgtLastName = ?," +
-                    "AgtBusPhone = ?," +
-                    "AgtEmail = ?," +
-                    "AgtPosition = ?," +
-                    "AgencyId = ? " +
-                    "where AgentId = ?";
 
-            saveData = connection.prepareStatement(UpdateQuery);
+            boolean canUpdate = true;
 
-            saveData.setString(1, txtAgentFirstName.getText());
-            saveData.setString(2, txtAgentMiddleInitial.getText());
-            saveData.setString(3, txtAgentLastName.getText());
-            saveData.setString(4, txtAgentBusinessPhone.getText());
-            saveData.setString(5, txtAgentEmail.getText());
-            saveData.setString(6, txtAgentPosition.getText());
-            saveData.setInt(7, Integer.parseInt(txtAgentAgencyId.getText()));
-            saveData.setInt(8, Integer.parseInt(txtAgentId.getText()));
+            if ((Validator.nullTextField(txtAgentFirstName) == true)||(Validator.alphabetOnly(txtAgentFirstName) == false)) {
+                txtAgentFirstName.setStyle("-fx-control-inner-background: RED");
+                canUpdate = false;
+                System.out.println(txtAgentFirstName.getText() + " is inValid");
 
-            saveData.executeUpdate();
-            System.out.println("Record Updated for Agent: (ID: " + Integer.parseInt(txtAgentId.getText()) + ") " + txtAgentFirstName.getText() + " " + txtAgentLastName.getText());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            saveData.close();
-        }
+            }
+            else { txtAgentFirstName.setStyle("-fx-control-inner-background: white"); }
+
+            if ((Validator.nullTextField(txtAgentMiddleInitial) == false) && (Validator.alphabetOnly(txtAgentMiddleInitial) == false)){
+                txtAgentMiddleInitial.setStyle("-fx-control-inner-background: RED");
+                System.out.println(txtAgentLastName.getText() + " is inValid");
+                canUpdate = false;
+
+
+            }
+            else { txtAgentMiddleInitial.setStyle("-fx-control-inner-background: white"); }
+
+            if ((Validator.nullTextField(txtAgentLastName) == true)||(Validator.alphabetOnly(txtAgentLastName) == false)) {
+                txtAgentLastName.setStyle("-fx-control-inner-background: RED");
+                System.out.println(txtAgentLastName.getText() + " is inValid");
+
+
+            }
+            else { txtAgentLastName.setStyle("-fx-control-inner-background: white"); }
+
+            if((Validator.nullTextField(txtAgentBusinessPhone) == true) || (Validator.isPhone(txtAgentBusinessPhone) == false)){
+                txtAgentBusinessPhone.setStyle("-fx-control-inner-background: RED");
+                System.out.println(txtAgentBusinessPhone.getText() + " is inValid");
+                canUpdate = false;
+
+            }
+            else { txtAgentBusinessPhone.setStyle("-fx-control-inner-background: white"); }
+
+            if((Validator.isEmail(txtAgentEmail) == false) || (Validator.nullTextField(txtAgentEmail) == true)) {
+                txtAgentEmail.setStyle("-fx-control-inner-background: RED");
+                System.out.println(txtAgentEmail.getText() + " is inValid");
+                canUpdate = false;
+
+            }
+            else { txtAgentEmail.setStyle("-fx-control-inner-background: white"); }
+
+            if ((Validator.alphaNumeric(txtAgentPosition) == false)){
+                txtAgentPosition.setStyle("-fx-control-inner-background: RED");
+                System.out.println(txtAgentPosition.getText() + " is inValid");
+                canUpdate = false;
+            }
+            else { txtAgentPosition.setStyle("-fx-control-inner-background: white"); }
+
+            if ((Validator.numbersOnly(txtAgentAgencyId) == false)){
+                txtAgentAgencyId.setStyle("-fx-control-inner-background: RED");
+                System.out.println(txtAgentAgencyId.getText() + " is inValid");
+                canUpdate = false;
+                ;
+            }
+            else { txtAgentAgencyId.setStyle("-fx-control-inner-background: white"); }
+
+
+
+            if (canUpdate == true)//updates
+            {
+                disableAllFields();
+                PreparedStatement saveData = null;
+                ResultSet resultSet = null;
+                try {
+                    String UpdateQuery = "UPDATE Agents set " +
+                            "AgtFirstName = ?," +
+                            "AgtMiddleInitial = ?," +
+                            "AgtLastName = ?," +
+                            "AgtBusPhone = ?," +
+                            "AgtEmail = ?," +
+                            "AgtPosition = ?," +
+                            "AgencyId = ? " +
+                            "where AgentId = ?";
+
+                    saveData = connection.prepareStatement(UpdateQuery);
+
+                    saveData.setString(1, txtAgentFirstName.getText());
+                    saveData.setString(2, txtAgentMiddleInitial.getText());
+                    saveData.setString(3, txtAgentLastName.getText());
+                    saveData.setString(4, txtAgentBusinessPhone.getText());
+                    saveData.setString(5, txtAgentEmail.getText());
+                    saveData.setString(6, txtAgentPosition.getText());
+                    saveData.setInt(7, Integer.parseInt(txtAgentAgencyId.getText()));
+                    saveData.setInt(8, Integer.parseInt(txtAgentId.getText()));
+
+                    saveData.executeUpdate();
+                    System.out.println("Record Updated for Agent: (ID: " + Integer.parseInt(txtAgentId.getText()) + ") " + txtAgentFirstName.getText() + " " + txtAgentLastName.getText());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    saveData.close();
+                }
+
+            }
+            else{
+                System.out.println("===========\nNOT UPDATED\n===========\n");
+
+            }
+
     }
+    private void Update() throws SQLException {
 
+    }
+    private void whiteOurTextBoxes()
+    {
+        txtAgentFirstName.setStyle("-fx-control-inner-background: White");
+        txtAgentMiddleInitial.setStyle("-fx-control-inner-background: White");
+        txtAgentLastName.setStyle("-fx-control-inner-background: White");
+        txtAgentBusinessPhone.setStyle("-fx-control-inner-background: White");
+        txtAgentEmail.setStyle("-fx-control-inner-background: White");
+        txtAgentPosition.setStyle("-fx-control-inner-background: White");
+        txtAgentAgencyId.setStyle("-fx-control-inner-background: White");
+
+    }
     //disables all fields
     private void disableAllFields() {
 
@@ -179,6 +264,7 @@ public class AgentsDetailController {
         } else {
             btnBackToListClicked(actionEvent);
         }
+        whiteOurTextBoxes();
 
     }
 
@@ -201,28 +287,88 @@ public class AgentsDetailController {
     }
 
     public void btnAgentAddClicked(ActionEvent event) throws SQLException {
-        PreparedStatement insertData = null;
-        ResultSet resultSet = null;
-        try {
-            String insertQuery = "INSERT INTO agents(AgtFirstName,AgtMiddleInitial,AgtLastName,AgtBusPhone,AgtEmail,AgtPosition,AgencyId) " +
-                    "VALUES(?,?,?,?,?,?,?)";
+        boolean canUpdate = true;
 
-            insertData = connection.prepareStatement(insertQuery);
-
-            insertData.setString(1, txtAgentFirstName.getText());
-            insertData.setString(2, txtAgentMiddleInitial.getText());
-            insertData.setString(3, txtAgentLastName.getText());
-            insertData.setString(4, txtAgentBusinessPhone.getText());
-            insertData.setString(5, txtAgentEmail.getText());
-            insertData.setString(6, txtAgentPosition.getText());
-            insertData.setInt(7, Integer.parseInt(txtAgentAgencyId.getText()));
-
-            insertData.executeUpdate();
-            System.out.println("Record Inserted for Agent: " + txtAgentFirstName.getText() + " " + txtAgentLastName.getText());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            insertData.close();
+        if ((Validator.nullTextField(txtAgentFirstName) == true)||(Validator.alphabetOnly(txtAgentFirstName) == false)) {
+            txtAgentFirstName.setStyle("-fx-control-inner-background: RED");
+            canUpdate = false;
+            System.out.println(txtAgentFirstName + " is inValid");
         }
+        else { txtAgentFirstName.setStyle("-fx-control-inner-background: white"); }
+
+        if ((Validator.nullTextField(txtAgentMiddleInitial) == false) && (Validator.alphabetOnly(txtAgentMiddleInitial) == false)){
+            txtAgentMiddleInitial.setStyle("-fx-control-inner-background: RED");
+            System.out.println(txtAgentLastName+ " is inValid");
+            canUpdate = false;
+        }
+        else { txtAgentMiddleInitial.setStyle("-fx-control-inner-background: white"); }
+
+        if ((Validator.nullTextField(txtAgentLastName) == true)||(Validator.alphabetOnly(txtAgentLastName) == false)) {
+            txtAgentLastName.setStyle("-fx-control-inner-background: RED");
+            System.out.println(txtAgentLastName + " is inValid");
+        }
+        else { txtAgentLastName.setStyle("-fx-control-inner-background: white"); }
+
+        if((Validator.nullTextField(txtAgentBusinessPhone) == true) || (Validator.isPhone(txtAgentBusinessPhone) == false)){
+            txtAgentBusinessPhone.setStyle("-fx-control-inner-background: RED");
+            System.out.println(txtAgentBusinessPhone + " is inValid");
+            canUpdate = false;
+
+        }
+        else { txtAgentBusinessPhone.setStyle("-fx-control-inner-background: white"); }
+
+        if((Validator.isEmail(txtAgentEmail) == false) || (Validator.nullTextField(txtAgentEmail) == true)) {
+            txtAgentEmail.setStyle("-fx-control-inner-background: RED");
+            System.out.println(txtAgentEmail + " is inValid");
+            canUpdate = false;
+
+        }
+        else { txtAgentEmail.setStyle("-fx-control-inner-background: white"); }
+
+        if ((Validator.alphaNumeric(txtAgentPosition) == false)){
+            txtAgentPosition.setStyle("-fx-control-inner-background: RED");
+            System.out.println(txtAgentPosition + " is inValid");
+            canUpdate = false;
+        }
+        else { txtAgentPosition.setStyle("-fx-control-inner-background: white"); }
+
+        if ((Validator.numbersOnly(txtAgentAgencyId) == false)){
+            txtAgentAgencyId.setStyle("-fx-control-inner-background: RED");
+            System.out.println(txtAgentAgencyId + " is inValid");
+            canUpdate = false;
+            ;
+        }
+        else { txtAgentAgencyId.setStyle("-fx-control-inner-background: white"); }
+
+
+
+        if (canUpdate == true)//updates
+        {
+            PreparedStatement insertData = null;
+
+            ResultSet resultSet = null;
+            try {
+                String insertQuery = "INSERT INTO agents(AgtFirstName,AgtMiddleInitial,AgtLastName,AgtBusPhone,AgtEmail,AgtPosition,AgencyId) " +
+                        "VALUES(?,?,?,?,?,?,?)";
+
+                insertData = connection.prepareStatement(insertQuery);
+
+                insertData.setString(1, txtAgentFirstName.getText());
+                insertData.setString(2, txtAgentMiddleInitial.getText());
+                insertData.setString(3, txtAgentLastName.getText());
+                insertData.setString(4, txtAgentBusinessPhone.getText());
+                insertData.setString(5, txtAgentEmail.getText());
+                insertData.setString(6, txtAgentPosition.getText());
+                insertData.setInt(7, Integer.parseInt(txtAgentAgencyId.getText()));
+
+                insertData.executeUpdate();
+                System.out.println("Record Inserted for Agent: " + txtAgentFirstName.getText() + " " + txtAgentLastName.getText());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                insertData.close();
+            }
+        }
+        else{ System.out.println("===========\nNOT UPDATED\n===========\n"); }
     }
 }

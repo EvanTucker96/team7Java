@@ -5,9 +5,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="364.0" prefWidth="246.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AgentsDetailController">
+<AnchorPane prefHeight="334.0" prefWidth="246.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AgentsDetailController">
    <children>
-      <Label layoutX="11.0" layoutY="28.0" prefHeight="27.0" prefWidth="55.0" text="Agent ID:" />
+      <Label layoutX="11.0" layoutY="27.0" prefHeight="27.0" prefWidth="55.0" text="Agent ID:" />
       <Label layoutX="11.0" layoutY="55.0" prefHeight="27.0" prefWidth="70.0" text="First Name:" />
       <Label layoutX="11.0" layoutY="82.0" prefHeight="27.0" prefWidth="86.0" text="Middle Initial:" />
       <Label layoutX="11.0" layoutY="109.0" prefHeight="27.0" prefWidth="86.0" text="Last Name:" />
@@ -15,7 +15,7 @@
       <Label layoutX="11.0" layoutY="163.0" prefHeight="27.0" prefWidth="55.0" text="Email:" />
       <Label layoutX="11.0" layoutY="190.0" prefHeight="27.0" prefWidth="55.0" text="Position:" />
       <Label layoutX="11.0" layoutY="217.0" prefHeight="27.0" prefWidth="70.0" text="Agency ID:" />
-      <TextField fx:id="txtAgentId" layoutX="109.0" layoutY="29.0" prefWidth="125.0" />
+      <TextField fx:id="txtAgentId" layoutX="109.0" layoutY="28.0" prefWidth="125.0" />
       <TextField fx:id="txtAgentFirstName" layoutX="109.0" layoutY="56.0" prefWidth="125.0" />
       <TextField fx:id="txtAgentMiddleInitial" layoutX="109.0" layoutY="83.0" prefWidth="125.0" />
       <TextField fx:id="txtAgentLastName" layoutX="109.0" layoutY="110.0" prefWidth="125.0" />
@@ -23,12 +23,12 @@
       <TextField fx:id="txtAgentEmail" layoutX="109.0" layoutY="164.0" prefWidth="125.0" />
       <TextField fx:id="txtAgentPosition" layoutX="109.0" layoutY="191.0" prefWidth="125.0" />
       <TextField fx:id="txtAgentAgencyId" layoutX="109.0" layoutY="218.0" prefWidth="125.0" />
-      <Button fx:id="btnAgentSave" layoutX="140.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnAgentSaveClicked" prefHeight="38.0" prefWidth="86.0" text="Save" />
-      <Button fx:id="btnAgentCancel" layoutX="23.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnAgentCancelClicked" prefHeight="38.0" prefWidth="86.0" text="Cancel" />
-      <Button fx:id="btnAgentEdit" layoutX="140.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnAgentEditClicked" prefHeight="38.0" prefWidth="86.0" text="Edit" />
-      <Button fx:id="btnAgentAdd" layoutX="140.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnAgentAddClicked" prefHeight="38.0" prefWidth="86.0" text="Add Agent" />
+      <Button fx:id="btnAgentSave" layoutX="148.0" layoutY="244.0" mnemonicParsing="false" onAction="#btnAgentSaveClicked" prefHeight="38.0" prefWidth="86.0" text="Save" />
+      <Button fx:id="btnAgentCancel" layoutX="11.0" layoutY="244.0" mnemonicParsing="false" onAction="#btnAgentCancelClicked" prefHeight="38.0" prefWidth="86.0" text="Cancel" />
+      <Button fx:id="btnAgentEdit" layoutX="148.0" layoutY="244.0" mnemonicParsing="false" onAction="#btnAgentEditClicked" prefHeight="38.0" prefWidth="86.0" text="Edit" />
+      <Button fx:id="btnAgentAdd" layoutX="148.0" layoutY="244.0" mnemonicParsing="false" onAction="#btnAgentAddClicked" prefHeight="38.0" prefWidth="86.0" text="Add Agent" />
 
-      <Button fx:id="btnBackToList" layoutX="81.0" layoutY="311.0" mnemonicParsing="false" onAction="#btnBackToListClicked" prefHeight="38.0" prefWidth="86.0" text="Back to List" />
+      <Button fx:id="btnBackToList" layoutX="80.0" layoutY="295.0" mnemonicParsing="false" onAction="#btnBackToListClicked" prefHeight="38.0" prefWidth="86.0" text="Back to List" />
 
    </children>
 </AnchorPane>

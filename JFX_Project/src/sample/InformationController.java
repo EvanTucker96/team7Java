@@ -140,6 +140,7 @@ public class InformationController {
 
     @FXML
     void btnCancelClick(ActionEvent event) {
+        whiteOutErrors();
         getCustomer(selectedCustomer, false);
         disableAllFields();
         btnEdit.setVisible(true);
@@ -162,7 +163,88 @@ public class InformationController {
 
     @FXML
     void btnSaveClick(ActionEvent event) throws SQLException {// For Customers who are already Assigned a agent
-        UpdateCustomer();
+        boolean canUpdate = true;
+
+        if ((Validator.nullTextField(txtFirstName) == true)||(Validator.alphabetOnly(txtFirstName) == false)) {
+            txtFirstName.setStyle("-fx-control-inner-background: RED");
+            canUpdate = false;
+            System.out.println(txtFirstName + " is inValid");
+        }
+        else { txtLastName.setStyle("-fx-control-inner-background: white"); }
+
+        if ((Validator.nullTextField(txtLastName) == true)||(Validator.alphabetOnly(txtLastName) == false)) {
+            txtLastName.setStyle("-fx-control-inner-background: RED");
+            canUpdate = false;
+            System.out.println(txtLastName + " is inValid");
+        }
+        else { txtLastName.setStyle("-fx-control-inner-background: white"); }
+
+        if ((Validator.alphaNumeric(txtAddress) == false)){
+            txtAddress.setStyle("-fx-control-inner-background: RED");
+            canUpdate = false;
+            System.out.println(txtAddress + " is inValid");
+        }
+        else { txtAddress.setStyle("-fx-control-inner-background: white"); }
+
+        if ((Validator.nullTextField(txtCity) == false) && (Validator.alphabetOnly(txtCity) == false)){
+            txtCity.setStyle("-fx-control-inner-background: RED");
+            canUpdate = false;
+            System.out.println(txtCity + " is inValid");
+        }
+        else { txtCity.setStyle("-fx-control-inner-background: white"); }
+
+        if ((Validator.nullTextField(txtProvince) == false) && (Validator.alphabetOnly(txtProvince) == false)){
+            txtProvince.setStyle("-fx-control-inner-background: RED");
+            canUpdate = false;
+            System.out.println(txtProvince + " is inValid");
+        }
+        else { txtProvince.setStyle("-fx-control-inner-background: white"); }
+
+        if ((Validator.nullTextField(txtPostal) == false) && (Validator.alphaNumeric(txtPostal) == false)){
+            //NOTE COULDNT GET Validator.isPostal(txtPostal) to work
+            txtPostal.setStyle("-fx-control-inner-background: RED");
+            canUpdate = false;
+            System.out.println(txtPostal + " is inValid");
+        }
+        else { txtPostal.setStyle("-fx-control-inner-background: white"); }
+
+        if ((Validator.nullTextField(txtCountry) == false) && (Validator.alphabetOnly(txtCountry) == false)){
+            //NOTE COULDNT GET Validator.isPostal(txtPostal) to work
+            txtCountry.setStyle("-fx-control-inner-background: RED");
+            canUpdate = false;
+            System.out.println(txtCountry + " is inValid");
+        }
+        else { txtCountry.setStyle("-fx-control-inner-background: white"); }
+
+        if((Validator.nullTextField(txtHomePhone) == true) || (Validator.isPhone(txtHomePhone) == false)){
+            txtHomePhone.setStyle("-fx-control-inner-background: RED");
+            System.out.println(txtHomePhone + " is inValid");
+            canUpdate = false;
+
+        }
+        else { txtHomePhone.setStyle("-fx-control-inner-background: white"); }
+
+        if((Validator.nullTextField(txtBusinessPhone) == true) || (Validator.isPhone(txtBusinessPhone) == false)){
+            txtBusinessPhone.setStyle("-fx-control-inner-background: RED");
+            System.out.println(txtBusinessPhone + " is inValid");
+            canUpdate = false;
+
+        }
+        else { txtBusinessPhone.setStyle("-fx-control-inner-background: white"); }
+
+        if((Validator.isEmail(txtEmail) == false) || (Validator.nullTextField(txtEmail) == true)) {
+            txtEmail.setStyle("-fx-control-inner-background: RED");
+            System.out.println(txtEmail + " is inValid");
+            canUpdate = false;
+
+        }
+        else { txtEmail.setStyle("-fx-control-inner-background: white"); }
+
+        if (canUpdate == true )
+        {
+            UpdateCustomer();
+        }
+        else{ System.out.println("===========\nNOT UPDATED\n===========\n"); }
     }
 
     @FXML
@@ -277,6 +359,21 @@ public class InformationController {
         btnBackToList.setVisible(true);
         btnSave.setVisible(false);
         btnCancel.setVisible(false);
+
+    }
+
+    private void whiteOutErrors() {
+        txtFirstName.setStyle("-fx-control-inner-background: white");
+        txtLastName.setStyle("-fx-control-inner-background: white");
+        txtAddress.setStyle("-fx-control-inner-background: white");
+        txtCity.setStyle("-fx-control-inner-background: white");
+        txtProvince.setStyle("-fx-control-inner-background: white");
+        txtPostal.setStyle("-fx-control-inner-background: white");
+        txtCountry.setStyle("-fx-control-inner-background: white");
+        txtHomePhone.setStyle("-fx-control-inner-background: white");
+        txtBusinessPhone.setStyle("-fx-control-inner-background: white");
+        txtEmail.setStyle("-fx-control-inner-background: white");
+
 
     }
 
