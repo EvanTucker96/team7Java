@@ -1,5 +1,39 @@
 # team7Java
 
+Work Contributions:
+
+Evan:
+	-Full Android App (With help from Bilal)
+	-Troubleshooting JSP Rest service
+	
+Brandon:
+	-
+	
+Bial:
+	-
+	
+Anthony:
+	-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <dependencies>
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
