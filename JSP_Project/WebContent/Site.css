@@ -1,0 +1,26 @@
+/*
+Bilal Ahmad
+May 7, 2020
+Purpose: Extra CSS for Agent.jsp
+*/
+body {
+    padding-top: 90px;
+    padding-bottom: 20px;
+    margin:auto;
+    width: auto;
+}
+
+#btnInsertAgent, 
+#btnCancelAgent,
+#btnUpdateAgent,
+#btnDeleteAgent,
+#agtDetailsForm{
+    display: none;
+}
+#message{
+    display: none;
+}
+
+#selectionRow{
+    display: inline;
+}

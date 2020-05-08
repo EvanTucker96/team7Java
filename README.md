@@ -32,7 +32,9 @@ Bial:
 			-Controller
 			-DBConnection
 			-Main
-	-
+	-JSP
+		- Full Rest Services
+		- Full Agent JSP page with header and Javascript
 	
 Anthony:
 	-

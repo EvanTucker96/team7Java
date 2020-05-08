@@ -44,10 +44,9 @@ public class AgentRestService {
 
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("JSP_Project");
 		EntityManager em = factory.createEntityManager();
-
+		
 		Query query = em.createQuery("select a from Agent a where a.agentId = " + agentID);
 		Agent agent = (Agent) query.getSingleResult();
-
 		Gson gson = new Gson();
 		em.close();
 		factory.close();
@@ -65,7 +64,6 @@ public class AgentRestService {
 		EntityManager em = factory.createEntityManager();
 		Query query = em.createQuery("select a from Agent a");
 		List<Agent> list = query.getResultList();
-
 		Gson gson = new Gson();
 		em.close();
 		factory.close();
@@ -82,9 +80,10 @@ public class AgentRestService {
 		EntityManager em = factory.createEntityManager();
 
 		Gson gson = new Gson();
-		Type type = new TypeToken<Agent>() {
-		}.getType();
-		Agent agent = gson.fromJson(jsonString, type);
+		/*
+		 * Type type = new TypeToken<Agent>() { }.getType();
+		 */
+		Agent agent = gson.fromJson(jsonString, Agent.class);
 		em.getTransaction().begin();
 		Agent newAgent = em.merge(agent);
 		em.getTransaction().commit();
@@ -129,7 +128,7 @@ public class AgentRestService {
 			em.getTransaction().rollback();
 			em.close();
 			factory.close();
-			return "There was an error deleting this agent";
+			return "error deleting this agent";
 		} else {
 			em.getTransaction().commit();
 			em.close();
