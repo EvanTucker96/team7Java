@@ -66,14 +66,17 @@ function loadAgentInfo(agentId) {
 //updates agent when update button is clicked
 function updateAgent() {
 	var req = new XMLHttpRequest();
-	req.onreadystatechange = function () {
+	req.onload = function () {
 		if (req.readyState == 4 && req.status == 200) {
+
 			Swal.fire({
 				icon: 'success',
 				title: 'Agent Updated Successfully!',
 				showConfirmButton: false,
 				timer: 2000
 			})
+
+
 			console.log(req.responseText);
 			reset();
 			loadAllAgents();
@@ -84,12 +87,15 @@ function updateAgent() {
 			}, 1000);
 		} else {
 			if (req.readyState != 3) {
+				//setTimeout(function(){
 				Swal.fire({
 					icon: 'error',
 					title: 'Agent Update Failed!',
 					showConfirmButton: false,
 					timer: 2000
 				})
+				//},1000)
+
 			}
 		}
 	}
@@ -104,7 +110,7 @@ function updateAgent() {
 //insert's new agent when insertAgent button is clicked
 function insertAgent() {
 	var req = new XMLHttpRequest();
-	req.onreadystatechange = function () {
+	req.onload = function () {
 		if (req.readyState == 4 && req.status == 200) {
 			Swal.fire({
 				icon: 'success',
@@ -181,7 +187,7 @@ function deleteAgent() {
 //validates fields for correct input
 function validateFields() {
 	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-	var phoneFormat = document.forms["agtDetailsForm"]["AgtBusPhone"].value.replace(/[^\d]/g, ''); // remove all non-digits
+	var phoneFormat = /^(\+0?1\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/g;
 
 	if (document.forms["agtDetailsForm"]["AgtFirstName"].value == "") {
 		alert("First Name must be filled!", "Agents Page");
@@ -205,7 +211,7 @@ function validateFields() {
 		document.forms["agtDetailsForm"]["AgtLastName"].focus();
 		return false;
 	}
-	if (["1","2"].includes(document.forms["agtDetailsForm"]["AgencyID"].value) == false) {
+	if (["1", "2"].includes(document.forms["agtDetailsForm"]["AgencyID"].value) == false) {
 		alert("AgencyID must be 1 or 2");
 		document.forms["agtDetailsForm"]["AgencyID"].focus();
 		return false;
@@ -215,8 +221,8 @@ function validateFields() {
 		document.forms["agtDetailsForm"]["AgtPosition"].focus();
 		return false;
 	}
-	if (phoneFormat && phoneFormat.length !== 10) {
-		alert("Invalid Phone number, Must be 10 digits!");
+	if(!document.forms["agtDetailsForm"]["AgtBusPhone"].value.match(phoneFormat)){
+		alert("Invalid Phone number!");
 		document.forms["agtDetailsForm"]["AgtBusPhone"].focus();
 		return false;
 	}
