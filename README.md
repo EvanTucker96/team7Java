@@ -37,6 +37,8 @@ Bial:
 		- Full Agent JSP page with header and Javascript
 	
 Anthony:
-	-
+	-JSP
+		- Full Agent Login Servlet and JSP page (with help from Bilal)
+		- Full Agent Landing (Welcome) page
 
 
